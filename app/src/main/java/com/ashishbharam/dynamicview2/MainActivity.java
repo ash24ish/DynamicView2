@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
     private ActivityMainBinding binding;
     private EmailRvAdapter adapter;
     private ArrayList<DepartmentModel> departmentModelList;
-    private ArrayList<DepartmentModel> tempDeptList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
 
     private void showDepartment(String selectedItem) {
         binding.etDepartment.setText(selectedItem);
-        tempDeptList = departmentModelList;
+        ArrayList<DepartmentModel> tempDeptList = departmentModelList;
         // TODO: 2 Add background to empty recyclerview that add employee
         /*Log.d(TAG, "showDepartment: "+adapter.getItemCount());
         Log.d(TAG, "showDepartment: "+departmentModelList.size());*/
@@ -100,17 +99,14 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
 
         //departmentModelList = new ArrayList<>();
 
-        if (!tempDeptList.isEmpty()) {
-            //adapter.notifyItemRangeRemoved(0, tempDeptList.size());
-            for (int i = 0; i < tempDeptList.size(); i++) {
-                if (!tempDeptList.get(i).getDepartmentName().equals(selectedItem)) {
-                    departmentModelList.remove(tempDeptList.get(i));
+        if (!departmentModelList.isEmpty()) {
+            for (int i = 0; i < departmentModelList.size(); i++) {
+                if (!departmentModelList.get(i).getDepartmentName().equals(selectedItem)) {
+                    departmentModelList.remove(departmentModelList.get(i));
                     adapter.notifyItemRemoved(i);
+                    --i;
                 }
             }
-            //adapter.notifyItemRangeInserted(0, departmentModelList.size());
-            //adapter.notifyItemRangeChanged(0,tempDeptList.size());
-            //departmentModelList = tempDeptList;
         } else {
             /*departmentModelList.add(new DepartmentModel("temp", "temp", "Inactive"));
             adapter.notifyItemInserted(departmentModelList.size() - 1);
@@ -162,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
         for (int i = 0; i < count; i++) {
             list.add(binding.selectDepartmentSpinner.getAdapter().getItem(i).toString());
         }
+        //checking department added in spinner or not
         if (!list.contains(tDepartmentName)) {
             binding.etDepartment.setError("Add Department");
             binding.etDepartment.requestFocus();
@@ -206,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
         int count = binding.selectDepartmentSpinner.getCount();
 
         if (tDepartmentName.isEmpty()) {
-            binding.etDepartment.setError("Empty");
+            binding.etDepartment.setError("Enter Department Name");
             binding.etDepartment.requestFocus();
             return;
         }
@@ -226,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
             Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
 
         } else {
-            binding.etDepartment.setError("Repeated");
+            binding.etDepartment.setError("Already Exists");
             binding.etDepartment.requestFocus();
         }
     }
