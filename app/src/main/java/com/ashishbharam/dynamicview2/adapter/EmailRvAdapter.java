@@ -13,6 +13,7 @@ import com.ashishbharam.dynamicview2.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmailRvAdapter extends RecyclerView.Adapter<EmailRvAdapter.EmpEmailViewHolder> {
@@ -59,6 +60,17 @@ public class EmailRvAdapter extends RecyclerView.Adapter<EmailRvAdapter.EmpEmail
     public int getItemCount() {
         return tempList.size();
     }
+
+    public void updateList( ArrayList<DepartmentModel> tList){
+        this.tempList = tList;
+        notifyDataSetChanged();
+    }
+
+    public void removeListItem( ArrayList<DepartmentModel> tList){
+        this.tempList = tList;
+        notifyDataSetChanged();
+    }
+
 
     public static class EmpEmailViewHolder extends RecyclerView.ViewHolder {
         OnMyItemClickListener onMyItemClickListener;
