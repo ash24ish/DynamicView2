@@ -98,7 +98,7 @@
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
-        <!--TODO: 2 Recyclerview auto height adjust shrink or expand-->
+        <!--TODO: 5 Recyclerview auto height adjust shrink or expand-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"

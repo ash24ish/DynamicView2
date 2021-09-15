@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // TODO: 14-Sep-21
+        // TODO: 1
         // android editetxt
         //add into spinner
         //emp edittext add
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
     private void showDepartment(String selectedItem) {
         binding.etDepartment.setText(selectedItem);
         tempDeptList = departmentModelList;
-        // TODO: 14-Sep-21 Add background to empty recyclerview that add employee
+        // TODO: 2 Add background to empty recyclerview that add employee
         /*Log.d(TAG, "showDepartment: "+adapter.getItemCount());
         Log.d(TAG, "showDepartment: "+departmentModelList.size());*/
         //departmentModelList.removeAll(tempDeptList); //got null
@@ -155,6 +155,21 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
             binding.etDepartment.requestFocus();
             return;
         }
+
+        List<String> list = new ArrayList<>();
+        int count = binding.selectDepartmentSpinner.getCount();
+        for (int i = 0; i < count; i++) {
+            list.add(binding.selectDepartmentSpinner.getAdapter().getItem(i).toString());
+        }
+        if (!list.contains(tDepartmentName)) {
+            binding.etDepartment.setError("Add Department");
+            binding.etDepartment.requestFocus();
+            return;
+        }else{
+            binding.etDepartment.clearFocus();
+            // TODO: 6 remove the requestFocus icon
+        }
+
         if (checkEmailExists(tEmail)) {
             Log.d(TAG, "departmentModelList: " + departmentModelList.size());
             departmentModelList.add(new DepartmentModel(tDepartmentName, tEmail, "Inactive"));
@@ -198,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
         for (int i = 0; i < count; i++) {
             list.add(binding.selectDepartmentSpinner.getAdapter().getItem(i).toString());
         }
-        // TODO: 1 Compare ignore case Android == android
+        // TODO: 4 Compare ignore case Android == android
 
         if (!list.contains(tDepartmentName)) {
             list.add(tDepartmentName);
@@ -206,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
                     android.R.layout.simple_spinner_item, list);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             binding.selectDepartmentSpinner.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+            //adapter.notifyDataSetChanged();
             Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
 
         } else {
