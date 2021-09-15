@@ -98,19 +98,19 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
         Log.d(TAG, "showDepartment: "+departmentModelList.size());*/
         //departmentModelList.removeAll(tempDeptList); //got null
 
-        departmentModelList = new ArrayList<>();
+        //departmentModelList = new ArrayList<>();
 
         if (!tempDeptList.isEmpty()) {
-            adapter.notifyItemRangeRemoved(0, tempDeptList.size());
+            //adapter.notifyItemRangeRemoved(0, tempDeptList.size());
             for (int i = 0; i < tempDeptList.size(); i++) {
-                if (tempDeptList.get(i).getDepartmentName().equals(selectedItem)) {
-                    departmentModelList.add(tempDeptList.get(i));
-                    adapter.notifyItemInserted(i);
+                if (!tempDeptList.get(i).getDepartmentName().equals(selectedItem)) {
+                    departmentModelList.remove(tempDeptList.get(i));
+                    adapter.notifyItemRemoved(i);
                 }
             }
-            adapter.notifyItemRangeInserted(0, departmentModelList.size());
+            //adapter.notifyItemRangeInserted(0, departmentModelList.size());
             //adapter.notifyItemRangeChanged(0,tempDeptList.size());
-            departmentModelList = tempDeptList;
+            //departmentModelList = tempDeptList;
         } else {
             /*departmentModelList.add(new DepartmentModel("temp", "temp", "Inactive"));
             adapter.notifyItemInserted(departmentModelList.size() - 1);
@@ -145,14 +145,15 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
         String tEmail = binding.etEmpEmail.getText().toString();
         String tDepartmentName = binding.etDepartment.getText().toString();
 
-        if (tEmail.isEmpty()) {
-            binding.etEmpEmail.setError("Enter Email");
-            binding.etEmpEmail.requestFocus();
-            return;
-        }
         if (tDepartmentName.isEmpty()) {
             binding.etDepartment.setError("Enter Department Name");
             binding.etDepartment.requestFocus();
+            return;
+        }
+
+        if (tEmail.isEmpty()) {
+            binding.etEmpEmail.setError("Enter Email");
+            binding.etEmpEmail.requestFocus();
             return;
         }
 
