@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">DynamicView2</string>
+    <string name="remove"><u>Remove</u></string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
+
+    <string-array name="department_list">
+        <item>Select</item>
+    </string-array>
+
+    <string-array name="department_list2">
+        <item>Select</item>
+        <item>Android</item>
+        <item>IOS</item>
+        <item>Web</item>
+    </string-array>
+</resources>

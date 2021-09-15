@@ -1,0 +1,2 @@
+rootProject.name = "DynamicView2"
+include ':app'
