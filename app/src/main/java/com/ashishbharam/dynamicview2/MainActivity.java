@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements EmailRvAdapter.On
                 }*/
                 if (departmentModelList.get(i).getDepartmentName().equals(selectedItem)) {
                     tempDeptList.add(departmentModelList.get(i));
+                }else{
+                    adapter.updateList(new ArrayList<DepartmentModel>());
                 }
             }
             if (tempDeptList.size() > 0) {
